@@ -370,7 +370,7 @@ const WHATSAPP = "5492626484124";
    precios: null cuando ese tamaño no se vende
    ========================================================= */
 const PESOS_STD = ["250 g", "500 g", "1 kg", "5 kg"];
-const PESOS_GOURMET = ["100 g", "1 kg", "5 kg"];
+const PESOS_GOURMET = ["100 g", "250 g", "500 g","1 kg", "5 kg"];
 
 const CATALOGO = [
   {
@@ -386,7 +386,7 @@ const CATALOGO = [
     categoria: "Frutos secos",
     pesos: PESOS_STD,
     productos: [
-      { nombre:"Almendras", nota:"guara grande, con piel", stock:"hay", precios:[7000, 13000, 25500, 127500] },
+      { nombre:"Almendras", nota:"guara grande, con piel", stock:"no", precios:[7000, 13000, 25500, 127500] },
       { nombre:"Nueces", nota:"mariposa grande, con piel", stock:"hay", precios:[5500, 10000, 18500, 91000] }
     ]
   },
@@ -402,21 +402,21 @@ const CATALOGO = [
       { nombre:"Durazno", stock:"hay", precios:[4500, 8500, 16000, 71500] },
       { nombre:"Pera", stock:"hay", precios:[4500, 8500, 16000, 71500] },
       { nombre:"Tomate", stock:"hay", precios:[4500, 8500, 16000, 71500] },
-      { nombre:"Arándanos deshidratados", stock:"poco", precios:[6500, 12000, 24000, null] }
+      { nombre:"Arándanos deshidratados", stock:"hay", precios:[6500, 12000, 24000, null] }
     ]
   },
   {
     categoria: "Gourmet",
     pesos: PESOS_GOURMET,
     productos: [
-      { nombre:"Harina de almendras 100%", nota:"con piel", stock:"hay", precios:[2450, 24500, null] },
-      { nombre:"Harina de almendras 70%", nota:"sin piel", stock:"hay", precios:[500, 5000, null] },
-      { nombre:"Granola sin pasas", stock:"hay", precios:[720, 7200, 35000] },
-      { nombre:"Granola con coco en escamas", stock:"no", precios:[950, 9500, 47000] },
-      { nombre:"Quinoa pop", stock:"hay", precios:[1200, 12000, null] },
-      { nombre:"Avena instantánea", stock:"hay", precios:[null, 3100, null] },
-      { nombre:"Harina integral fina", stock:"hay", precios:[null, 1500, null] },
-      { nombre:"Flor de hibiscus", stock:"hay", precios:[2500, 23000, null] }
+      { nombre:"Harina de almendras 100%", nota:"con piel", stock:"hay", precios:[2450, null, 12250, 24500, null] },
+      { nombre:"Harina de almendras 70%", nota:"sin piel", stock:"hay", precios:[null, null, 2500, 5000, null] },
+      { nombre:"Granola sin pasas", stock:"hay", precios:[null, 1800, 3600, 7200, null] },
+      { nombre:"Granola con coco en escamas", stock:"hay", precios:[null,2375, 4750, 9500, null] },
+      { nombre:"Quinoa pop", stock:"hay", precios:[1200, 3000, 6000, 12000, null] },
+      { nombre:"Avena instantánea", stock:"hay", precios:[null, null, null, 3100, null] },
+      { nombre:"Harina integral fina", stock:"hay", precios:[null, null, null, 1500, null] },
+      { nombre:"Flor de hibiscus", stock:"hay", precios:[2500, 5750, 11500, null, null] }
     ]
   }
 ];
@@ -435,11 +435,12 @@ function clave(prod, peso){
 function tarjeta(prod, pesos){
   const medidas = pesos.map((peso, i) => {
     const p = prod.precios[i];
+    
     if (p == null){
-      return '<li class="medida vacia"><span class="info"><span class="peso">'+peso+'</span><span class="precio">—</span></span></li>';
+      return '';
     }
     if (prod.stock === "no"){
-      return '<li class="medida"><span class="info"><span class="peso">'+peso+'</span><span class="precio">'+plata(p)+'</span></span></li>';
+      return '<li class="medida sin-stock-medida"></li>';
     }
     const k = clave(prod, peso);
     return '<li class="medida" data-k="'+k+'">'
@@ -453,7 +454,7 @@ function tarjeta(prod, pesos){
   }).join("");
 
   const boton = prod.stock === "no"
-    ? '<span class="wa off">Sin stock por ahora</span>'
+    ? '<span class="wa off">Proximamente disponible</span>'
     : '<a class="wa" href="'+linkWhatsApp(prod)+'" target="_blank" rel="noopener">'+ICONO_WA+'Consultar por WhatsApp</a>';
 
   return '<article class="card">'
