@@ -238,6 +238,27 @@ main{padding:26px 0 10px}
 }
 .vacio strong{display:block;color:var(--texto);font-size:1.1rem;margin-bottom:6px;font-family:"Bricolage Grotesque",sans-serif}
 
+/* ---------- Próximamente ---------- */
+.prox-sub{margin:-6px 0 16px;color:var(--texto-suave);font-size:.92rem}
+.prox-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.prox-card{
+  border:1.5px dashed var(--linea-fuerte);border-radius:16px;padding:16px 18px;
+  background:rgba(255,253,247,.5);display:flex;flex-direction:column;align-items:flex-start;gap:8px;
+}
+.prox-card h3{font-size:1.08rem;font-weight:600}
+.prox-tag{
+  font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--acento);background:var(--chip);border:1px solid var(--linea);
+  border-radius:999px;padding:3px 9px;
+}
+.prox-aviso{margin-top:auto;font-size:.88rem;font-weight:700;color:var(--texto);text-decoration:underline;text-underline-offset:3px}
+.prox-aviso:hover{color:var(--acento)}
+@media (max-width:560px){
+  .prox-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .prox-card{padding:12px}
+  .prox-card h3{font-size:.92rem;line-height:1.2}
+  .prox-aviso{font-size:.76rem}
+}
 /* ---------- Pie ---------- */
 footer{
   border-top:1px solid var(--linea);margin-top:40px;padding:34px 0 46px;
@@ -331,6 +352,12 @@ footer{
   <div id="salida"></div>
 </main>
 
+<section class="wrap grupo" id="proximamente" hidden>
+  <h2>Próximamente</h2>
+  <p class="prox-sub">Productos que ingresan en estos días</p>
+  <div class="prox-grid" id="proxGrid"></div>
+</section>
+
 <footer class="wrap">
   <a class="footer-wa" href="https://wa.me/5492626484124" target="_blank" rel="noopener">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.1-.3 0-.4.1-.6.1-.1.4-.5.6-.8.1-.2.2-.4.3-.6.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.6s1.1 3 1.3 3.2c.1.2 2.1 3.3 5.2 4.5 3.1 1.2 3.1.8 3.7.8.6-.1 1.8-.7 2.1-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.3zM12 21.8c-1.7 0-3.3-.5-4.7-1.3l-3.3.9.9-3.2c-1-1.5-1.5-3.2-1.5-5C3.4 7.5 7.3 3.7 12 3.7s8.6 3.8 8.6 8.5-3.9 8.6-8.6 8.6zM12 2C6.4 2 1.8 6.6 1.8 12.2c0 2 .6 3.8 1.6 5.4L1.6 23l5.6-1.5c1.5.8 3.1 1.2 4.8 1.2 5.6 0 10.2-4.6 10.2-10.2S17.6 2 12 2z"/></svg>
@@ -421,6 +448,13 @@ const CATALOGO = [
   }
 ];
 
+const PROXIMAMENTE = [
+  { nombre:"Coco en escamas" },
+  { nombre:"Chips de banana" },
+  { nombre:"Mix de 4 semillas" },
+  { nombre:"Aritos frutales" }
+];
+
 /* ========================= Render ========================= */
 const ETIQUETA_STOCK = { hay:"Disponible", poco:"Poco stock", no:"Sin stock" };
 const ICONO_WA = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.1-.3 0-.4.1-.6.1-.1.4-.5.6-.8.1-.2.2-.4.3-.6.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.6s1.1 3 1.3 3.2c.1.2 2.1 3.3 5.2 4.5 3.1 1.2 3.1.8 3.7.8.6-.1 1.8-.7 2.1-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.3zM12 2C6.4 2 1.8 6.6 1.8 12.2c0 2 .6 3.8 1.6 5.4L1.6 23l5.6-1.5c1.5.8 3.1 1.2 4.8 1.2 5.6 0 10.2-4.6 10.2-10.2S17.6 2 12 2z"/></svg>';
@@ -509,8 +543,27 @@ function render(){
     salida.innerHTML = html;
   }
   pintarCantidadesEnTarjetas();
+   renderProximamente();
 }
-
+function renderProximamente(){
+  const sec = document.getElementById("proximamente");
+  const grid = document.getElementById("proxGrid");
+  const q = document.getElementById("q").value.trim();
+  const soloStock = document.getElementById("soloStock").checked;
+  const mostrar = PROXIMAMENTE.length > 0 && !q && !soloStock && filtroCat === "todas";
+  sec.hidden = !mostrar;
+  if (!mostrar) return;
+  grid.innerHTML = PROXIMAMENTE.map(p => {
+    const texto = "¡Hola Impulso Deli! Avisame cuando llegue: *" + p.nombre + "*";
+    const link = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(texto);
+    return '<article class="prox-card">'
+      + '<span class="prox-tag">Llega pronto</span>'
+      + '<h3>' + p.nombre + '</h3>'
+      + (p.desc ? '<p class="desc">' + p.desc + '</p>' : '')
+      + '<a class="prox-aviso" href="' + link + '" target="_blank" rel="noopener">Avisame cuando llegue</a>'
+      + '</article>';
+  }).join("");
+}
 /* Filtros de categoría */
 const cats = ["todas", ...CATALOGO.map(g => g.categoria)];
 document.getElementById("cats").innerHTML = cats.map(c =>
