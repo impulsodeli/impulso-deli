@@ -504,8 +504,8 @@ const CATALOGO = [
     categoria: "Mixes",
     pesos: PESOS_STD,
     productos: [
-      { nombre:"Mix Tropical", foto:"fotos/mix-tropical.png", desc:"Chips de banana, almendras, nueces, pasas de uva morenas y rubias, castañas de cajú, ananá", stock:"hay", precios:[5000, 9000, 16500, 82500] },
-      { nombre:"Mix Europeo", foto:"fotos/mix-europeo.png", desc:"Almendras, nueces, castañas de cajú, pasas de uva rubias y morenas", stock:"hay", precios:[5500, 9500, 17500, 84000] },
+      { nombre:"Mix Tropical", foto:"fotos/mix-tropical.png", desc:"Chips de banana, almendras, nueces, pasas de uva morenas y rubias, castañas de cajú, ananá", stock:"hay", precios:[5500, 10000, 18500, 82500] },
+      { nombre:"Mix Europeo", foto:"fotos/mix-europeo.png", desc:"Almendras, nueces, castañas de cajú, pasas de uva rubias y morenas", stock:"hay", precios:[5500, 1000, 18500, 82500] },
       { nombre:"Mix Frutal", desc:"Durazno, damasco, ciruela, pera", stock:"poco", precios:[null, 5700, 11700, 58500] }
     ]
   },
@@ -514,8 +514,8 @@ const CATALOGO = [
     pesos: PESOS_STD,
     productos: [
       { nombre:"Almendras", foto:"fotos/almendra.png", nota:"guara grande, con piel", stock:"no", precios:[7000, 13000, 25500, 127500] },
-      { nombre:"Nueces", nota:"mariposa grande, con piel", stock:"hay", precios:[5500, 10000, 18500, 91000] },
-      { nombre:"Castañas de cajú", foto:"fotos/castana-caju2.png", stock:"hay", precios:[null, 23444, null, null] }
+      { nombre:"Nueces", nota:"mariposa grande, con piel", stock:"hay", precios:[6000, 11000, 20000, 91000] },
+      { nombre:"Castañas de cajú", foto:"fotos/castana-caju2.png", stock:"hay", precios:[null, 17500, 9500, 5250] }
     ]
   },
   {
@@ -523,16 +523,16 @@ const CATALOGO = [
     pesos: PESOS_STD,
     productos: [
       { nombre:"Ciruela deshidratada grande", stock:"hay", precios:[3000, 5000, 9000, 43000] },
-      { nombre:"Dátiles", foto:"fotos/datiles.png", stock:"hay", precios:[3500, 6500, 11500, 56500] },
+      { nombre:"Dátiles",nota:"de Argelia, con carozo", foto:"fotos/datiles.png", stock:"hay", precios:[3750, 6700, 12000, 56500] },
       { nombre:"Higos", stock:"hay", precios:[3500, 6500, 12000, 54000] },
-      { nombre:"Pasas de uva morena flame", foto:"fotos/pasa-morena.png",stock:"hay", precios:[2200, 3500, 6500, 31500] },
-      { nombre:"Pasas de uva rubia AA", foto:"fotos/pasas-rubias.png",stock:"hay", precios:[2200, 3500, 6500, 31500] },
+      { nombre:"Pasas de uva morena", nota:"flame",foto:"fotos/pasa-morena.png",stock:"hay", precios:[2500, 4000, 7000, 33500] },
+      { nombre:"Pasas de uva rubia",nota:"AA", foto:"fotos/pasas-rubias.png",stock:"hay", precios:[3250, 6000, 11500, 56000] },
       { nombre:"Durazno", stock:"hay", precios:[4500, 8500, 16000, 71500] },
       { nombre:"Pera", stock:"hay", precios:[4500, 8500, 16000, 71500] },
       { nombre:"Tomate", stock:"hay", precios:[4500, 8500, 16000, 71500] },
       { nombre:"Arándanos deshidratados", foto:"fotos/arandanos.png", stock:"hay", precios:[6500, 12000, 24000, null] },
-      { nombre:"Chips de banana", foto:"fotos/chip-banana.png", stock:"hay", precios:[null, 2345, null, null] },
-      { nombre:"Papaya", foto:"fotos/papaya.png", stock:"hay", precios:[null, null, 5678, null] }
+      { nombre:"Chips de banana", foto:"fotos/chip-banana.png", stock:"hay", precios:[4500, null, null, null] },
+      { nombre:"Papaya", foto:"fotos/papaya.png", stock:"hay", precios:[6250, null, null, null] }
     ]
   },
   {
@@ -550,9 +550,9 @@ const CATALOGO = [
     pesos: PESOS_GOURMET,
     productos: [
       { nombre:"Quinoa pop", stock:"hay", precios:[1200, 3000, 6000, 12000, null] },
-      { nombre:"Granola clásica", foto:"fotos/granola-clasica.png", stock:"hay", precios:[null, 1800, 3600, 7200, null] },
-      { nombre:"Granola premium", foto:"fotos/granola-premium.png", stock:"hay", precios:[null, 2375, 4750, 9500, null] },
-      { nombre:"Aritos frutales", stock:"hay", precios:[null, 64646, null, null, null] }
+      { nombre:"Granola clásica", foto:"fotos/granola-clasica.png", stock:"hay", precios:[null, 2100, 4100, 8200, null] },
+      { nombre:"Granola premium", foto:"fotos/granola-premium.png", stock:"hay", precios:[null, 2650, 5200, 10500, null] },
+      { nombre:"Aritos frutales", stock:"hay", precios:[1000, null, null, null, null] }
     ]
   },
   {
@@ -560,8 +560,9 @@ const CATALOGO = [
     pesos: PESOS_GOURMET,
     productos: [
       { nombre:"Flor de hibiscus", foto:"fotos/flor-hibiscus.png", stock:"hay", precios:[2500, 5750, 11500, null, null] },
-      { nombre:"Mix de 4 semillas", foto:"fotos/mix-cuatro-semillas.png", stock:"hay", precios:[null, 44444, null, null, null] },
-      { nombre:"Coco en escamas", foto:"fotos/escama-coco.png", stock:"hay", precios:[null, 21111, null, null, null] }
+      { nombre:"Mix de 4 semillas", foto:"fotos/mix-cuatro-semillas.png", stock:"hay", precios:[2500, 4000, 7000, null, null] },
+      { nombre:"Coco en escamas", foto:"fotos/escama-coco.png", stock:"hay", precios:[null,5000, 9500, 18000, null] }
+      { nombre:"Pasta de maní natural Oddi's", nota:"Envase vidrio x350g, Libre de glutén, Keto certificado, producto vegano", stock:"hay", precios:[null,5000, 9500, 18000, null] }
     ]
   }
 ];
@@ -579,8 +580,8 @@ const NOVEDADES = [
   {
     nombre: "Mix 4 semillas",
     foto: "fotos/mix-cuatro-semillas.png",
-    precioAnterior: "$6.500",
-    precioLanzamiento: "$5.000",
+    precioAnterior: "",
+    precioLanzamiento: "$2.500 x250g",
     etiqueta: "Precio de lanzamiento",
     producto: "Mix 4 semillas"
   },
@@ -588,15 +589,15 @@ const NOVEDADES = [
     nombre: "Chips de banana",
     foto: "fotos/chip-banana.png",
     precioAnterior: "",
-    precioLanzamiento: "$6.000",
+    precioLanzamiento: "$4.500 x250g",
     etiqueta: "Nuevo producto",
-    producto: "Mix 4 semillas"
+    producto: "Chips de banana"
   },
   {
     nombre: "Coco en escamas",
     foto: "fotos/escama-coco.png",
     precioAnterior: "",
-    precioLanzamiento: "$5.000",
+    precioLanzamiento: "$5.000 x250g",
     etiqueta: "Destacado",
     producto: "Coco en escamas"
   }
