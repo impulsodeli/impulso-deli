@@ -238,56 +238,6 @@ main{padding:26px 0 10px}
 }
 .vacio strong{display:block;color:var(--texto);font-size:1.1rem;margin-bottom:6px;font-family:"Bricolage Grotesque",sans-serif}
 
-/* Fondo del visor */
-.visor-imagen {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background: rgba(0, 0, 0, 0.88);
-  align-items: center;
-  justify-content: center;
-  padding: 60px 20px 20px;
-}
-
-/* Mostrar el visor */
-.visor-imagen.activo {
-  display: flex;
-}
-
-/* Imagen ampliada */
-.visor-imagen img {
-  display: block;
-  max-width: 90vw;
-  max-height: 85vh;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  border-radius: 10px;
-}
-
-/* Botón para cerrar */
-.visor-cerrar {
-  position: absolute;
-  top: 18px;
-  right: 24px;
-  border: none;
-  background: transparent;
-  color: white;
-  font-size: 42px;
-  line-height: 1;
-  cursor: pointer;
-}
-
-.visor-cerrar:hover {
-  opacity: 0.7;
-}
-
-/* Indicar que las fotos se pueden ampliar */
-.producto img {
-  cursor: zoom-in;
-}
-
 /* ---------- Fotos en las tarjetas ---------- */
 .card-foto{aspect-ratio:4/3;background:var(--chip);overflow:hidden}
 .card-foto img{width:100%;height:100%;object-fit:cover;display:block}
@@ -438,17 +388,6 @@ footer{
 
 </style>
 </head>
-
-<!-- Visor de imágenes ampliadas -->
-<div id="visor-imagen" class="visor-imagen" aria-hidden="true">
-  <button
-    type="button"
-    class="visor-cerrar"
-    aria-label="Cerrar imagen"
-  >&times;</button>
-
-  <img id="imagen-ampliada" src="" alt="">
-</div>
 
 <body>
 
@@ -1106,49 +1045,6 @@ render();
 actualizarTodo();
 
 
-const visor = document.getElementById("visor-imagen");
-const imagenAmpliada = document.getElementById("imagen-ampliada");
-const botonCerrar = document.querySelector(".visor-cerrar");
-
-// Abrir cualquier foto del catálogo
-document.addEventListener("click", function (evento) {
-  const foto = evento.target.closest(".producto img");
-
-  if (!foto) return;
-
-  imagenAmpliada.src = foto.src;
-  imagenAmpliada.alt = foto.alt || "Imagen ampliada del producto";
-
-  visor.classList.add("activo");
-  visor.setAttribute("aria-hidden", "false");
-  document.body.style.overflow = "hidden";
-});
-
-// Cerrar con la X
-function cerrarVisor() {
-  visor.classList.remove("activo");
-  visor.setAttribute("aria-hidden", "true");
-  imagenAmpliada.src = "";
-  document.body.style.overflow = "";
-}
-
-botonCerrar.addEventListener("click", cerrarVisor);
-
-// Cerrar haciendo clic fuera de la foto
-visor.addEventListener("click", function (evento) {
-  if (evento.target === visor) {
-    cerrarVisor();
-  }
-});
-
-// Cerrar con la tecla Escape
-document.addEventListener("keydown", function (evento) {
-  if (evento.key === "Escape" && visor.classList.contains("activo")) {
-    cerrarVisor();
-  }
-});
-
 </script>
-
 </body>
 </html>
