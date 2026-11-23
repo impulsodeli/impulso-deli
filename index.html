@@ -99,59 +99,107 @@ header{padding:44px 0 26px;text-align:center}
 .solo-stock input{accent-color:var(--oliva);width:17px;height:17px;margin:0}
 
 /* ---------- Grilla de productos ---------- */
-main{padding:26px 0 10px}
-.conteo{color:var(--texto-suave);font-size:.9rem;margin:0 0 18px}
-.grupo{margin:0 0 38px}
+main{padding:22px 0 10px}
+.conteo{color:var(--texto-suave);font-size:.9rem;margin:0 0 14px}
+.grupo{margin:0 0 30px}
 .grupo > h2{
-  font-size:1.35rem;display:flex;align-items:center;gap:12px;
-  margin:0 0 16px;color:var(--acento);
+  font-size:1.25rem;display:flex;align-items:center;gap:12px;
+  margin:0 0 12px;color:var(--acento);
 }
 .grupo > h2::after{content:"";flex:1;height:1px;background:var(--linea)}
-.grilla{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.grilla{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;align-items:start;grid-auto-flow:dense}
 
-.card{
-  background:var(--panel);border:1px solid var(--linea);border-radius:16px;
-  overflow:hidden;display:flex;flex-direction:column;
+.card{background:var(--panel);border:1px solid var(--linea);border-radius:14px;overflow:hidden}
+.card.abierta{grid-column:span 2;border-color:var(--linea-fuerte)}
+
+.card-head{
+  position:relative;width:100%;display:flex;flex-direction:column;
+  padding:0;border:0;background:none;color:inherit;font:inherit;text-align:left;cursor:pointer;
 }
-.card-cuerpo{padding:16px 18px 16px;display:flex;flex-direction:column;flex:1}
-.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
-.card h3{font-size:1.12rem;font-weight:600}
-.card h3 em{font-style:normal;font-weight:400;font-size:.9rem;color:var(--texto-suave)}
-.desc{margin:6px 0 0;font-size:.88rem;color:var(--texto-suave)}
+.card-foto{position:relative;aspect-ratio:4/3;background:var(--chip);overflow:hidden;display:flex;align-items:center;justify-content:center}
+.card-foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.foto-vacia{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:2.4rem;color:var(--acento);opacity:.4}
+.card-info{padding:10px 36px 12px 12px;display:flex;flex-direction:column;gap:5px}
+.card-nombre{
+  font-family:"Bricolage Grotesque","Karla",sans-serif;font-weight:600;font-size:1rem;line-height:1.15;
+  min-height:2.3em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.card-desde{display:flex;align-items:baseline;gap:6px}
+.card-desde .peso{font-size:.76rem;color:var(--texto-suave);font-weight:500}
+.card-desde .precio{font-weight:700;font-size:1.05rem}
+.card-desde .prox{font-size:.85rem;color:var(--texto-suave)}
+.chev{
+  position:absolute;right:14px;bottom:16px;width:9px;height:9px;
+  border-right:2px solid var(--texto-suave);border-bottom:2px solid var(--texto-suave);
+  transform:rotate(45deg);transition:transform .2s;
+}
+
+.card-foto .stock{position:absolute;left:8px;top:8px;margin:0;background:var(--panel)}
+.card-badge{
+  position:absolute;right:8px;top:8px;min-width:24px;height:24px;padding:0 7px;border-radius:999px;
+  background:var(--marron);color:var(--crema);font-size:.8rem;font-weight:800;
+  display:flex;align-items:center;justify-content:center;
+}
+.card-badge[hidden]{display:none}
+
+/* abierta: cabecera horizontal y chica */
+.card.abierta .card-head{flex-direction:row;align-items:center;gap:12px;padding:12px}
+.card.abierta .card-foto{flex:0 0 64px;width:64px;aspect-ratio:1;border-radius:10px}
+.card.abierta .card-foto .stock,.card.abierta .card-badge{display:none}
+.card.abierta .card-info{padding:0;flex:1;min-width:0}
+.card.abierta .card-nombre{min-height:0;font-size:1.1rem;-webkit-line-clamp:3}
+.card.abierta .card-desde{display:none}
+.card.abierta .chev{top:50%;bottom:auto;right:18px;margin-top:-2px;transform:translateY(-50%) rotate(-135deg)}
+.card.abierta .card-head{padding-right:40px}
+
+.card-detalle{padding:0 12px 12px;display:flex;flex-direction:column;gap:10px}
+.card-detalle[hidden]{display:none}
+.det-nota{margin:0;font-size:.9rem;font-weight:500}
+.desc{margin:0;font-size:.84rem;line-height:1.4;color:var(--texto-suave)}
 
 .stock{
-  flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;
-  font-size:.76rem;font-weight:700;letter-spacing:.02em;
-  padding:5px 10px;border-radius:999px;border:1px solid;
+  display:inline-flex;align-items:center;gap:5px;align-self:flex-start;
+  font-size:.7rem;font-weight:700;letter-spacing:.02em;
+  padding:3px 8px;border-radius:999px;border:1px solid;
 }
-.stock::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.stock::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
 .stock.hay{color:var(--oliva);border-color:rgba(122,139,111,.45);background:rgba(122,139,111,.12)}
 .stock.poco{color:#b06f25;border-color:rgba(176,111,37,.4);background:rgba(176,111,37,.12)}
 .stock.no{color:#9a5a52;border-color:rgba(154,90,82,.4);background:rgba(154,90,82,.12)}
 
-.medidas{
-  list-style:none;margin:16px 0 0;padding:0;
-  display:flex;flex-direction:column;gap:8px;
+.consultar{
+  align-self:flex-start;display:inline-flex;align-items:center;gap:7px;
+  padding:7px 13px;border-radius:999px;border:1px solid var(--linea-fuerte);
+  color:var(--texto);text-decoration:none;font-size:.85rem;font-weight:600;
+  transition:background .15s,color .15s;
 }
+.consultar svg{width:16px;height:16px;fill:var(--oliva)}
+.consultar:hover{background:var(--chip)}
+
+.medidas{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:6px}
 .medida{
   background:var(--chip);border:1px solid var(--linea);border-radius:10px;
-  padding:9px 10px;display:flex;align-items:center;justify-content:space-between;gap:8px;
+  padding:5px 5px 5px 10px;min-height:44px;cursor:pointer;
+  display:flex;align-items:center;justify-content:space-between;gap:4px;
+  transition:background .15s,border-color .15s;
 }
-.medida .info{display:flex;flex-direction:column;line-height:1.25}
-.medida .peso{font-size:.76rem;color:var(--texto-suave);font-weight:500}
-.medida .precio{font-weight:700;font-size:1rem}
-.medida.vacia{opacity:.45}
-.medida.vacia .precio{font-weight:400;color:var(--texto-suave)}
+.medida:hover{border-color:var(--linea-fuerte)}
+.medida.en-carrito{border-color:var(--acento);background:rgba(166,124,82,.2)}
+.medida .info{display:flex;flex-direction:column;line-height:1.2;min-width:0}
+.medida .peso{font-size:.72rem;color:var(--texto-suave);font-weight:500}
+.medida .precio{font-weight:700;font-size:.95rem;white-space:nowrap}
+.sin-stock-msg{margin:0;font-size:.85rem;color:var(--texto-suave);border:1px dashed var(--linea-fuerte);border-radius:10px;padding:9px 12px;text-align:center}
 
-.stepper{display:flex;align-items:center;gap:0;border:1px solid var(--linea-fuerte);border-radius:999px;overflow:hidden;flex:0 0 auto}
+.stepper{display:flex;align-items:center;border:1px solid var(--linea-fuerte);border-radius:999px;overflow:hidden;flex:0 0 auto;background:var(--panel)}
 .stepper button{
-  width:30px;height:30px;border:none;background:transparent;color:var(--texto);
+  width:28px;height:28px;border:none;background:transparent;color:var(--texto);
   font-size:1.05rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;
   font-family:inherit;
 }
 .stepper button:hover{background:var(--chip)}
-.stepper button:disabled{opacity:.35;cursor:not-allowed}
-.stepper .cant{min-width:22px;text-align:center;font-weight:700;font-size:.9rem}
+.stepper .cant{min-width:18px;text-align:center;font-weight:700;font-size:.85rem}
+.medida:not(.en-carrito) .stepper [data-accion="restar"],
+.medida:not(.en-carrito) .stepper .cant{display:none}
 
 .wa{
   margin-top:16px;display:flex;align-items:center;justify-content:center;gap:9px;
@@ -162,7 +210,6 @@ main{padding:26px 0 10px}
 }
 .wa:hover{background:var(--btn-hover)}
 .wa svg{width:18px;height:18px;flex:0 0 auto;fill:currentColor}
-.wa.off{background:transparent;color:var(--texto-suave);border:1px dashed var(--linea-fuerte);cursor:not-allowed;font-weight:500}
 
 /* ---------- Carrito ---------- */
 .carrito-boton{
@@ -237,11 +284,6 @@ main{padding:26px 0 10px}
   border:1px dashed var(--linea-fuerte);border-radius:16px;
 }
 .vacio strong{display:block;color:var(--texto);font-size:1.1rem;margin-bottom:6px;font-family:"Bricolage Grotesque",sans-serif}
-
-/* ---------- Fotos en las tarjetas ---------- */
-.card-foto{aspect-ratio:4/3;background:var(--chip);overflow:hidden}
-.card-foto img{width:100%;height:100%;object-fit:cover;display:block}
-
 
 /* ---------- Próximamente ---------- */
 .prox-sub{margin:-6px 0 16px;color:var(--texto-suave);font-size:.92rem}
@@ -326,37 +368,11 @@ footer{
 
 @media (max-width:560px){
   header{padding:30px 0 20px}
-
+  .wrap{padding:0 14px}
   .grilla{grid-template-columns:repeat(2,1fr);gap:10px}
-
-  .card-cuerpo{padding:12px 12px 12px}
-  .card-top{gap:6px}
-  .card h3{font-size:.92rem;line-height:1.2}
-  .card h3 em{display:block;font-size:.72rem;margin-top:2px}
-  .desc{font-size:.74rem;margin-top:4px}
-
-  .stock{font-size:.62rem;padding:4px 7px;gap:4px}
-  .stock::before{width:6px;height:6px}
-
-  .medidas{margin-top:10px;gap:6px}
-  .medida{padding:6px 7px;gap:6px;border-radius:8px}
-  .medida .peso{font-size:.64rem}
-  .medida .precio{font-size:.82rem}
-
-  .stepper button{width:24px;height:24px;font-size:.9rem}
-  .stepper .cant{min-width:16px;font-size:.78rem}
-
-  .wa{margin-top:10px;padding:9px 8px;font-size:.76rem;gap:5px}
-  .wa svg{width:14px;height:14px}
-
   .barra-in{gap:8px}
   .cats{order:3;width:100%}
   .footer-wa{font-size:1.25rem}
-}
-
-@media (max-width:380px){
-  .grilla{gap:8px}
-  .card-cuerpo{padding:10px 9px 10px}
 }
 #novedades{margin:18px auto 22px;padding:22px 22px 18px;border:1px solid rgba(100,123,85,.16);border-radius:22px;background:linear-gradient(135deg,rgba(238,243,232,.95),rgba(250,248,241,.96));overflow:hidden;}
 .nov-head{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:15px}
@@ -726,48 +742,54 @@ const limpiar = t => (t||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u0
 function clave(prod, peso){
   return (prod.nombre + "|" + peso).toLowerCase();
 }
-const FOTOS_ROTAS = new Set();   // fotos que no se encontraron (para no insistir)
-function fotoHtml(prod){
-  if (!prod.foto || FOTOS_ROTAS.has(prod.foto)) return '';
-  return '<div class="card-foto"><img src="'+prod.foto+'" alt="'+prod.nombre.replace(/"/g,'&quot;')+'" loading="lazy" decoding="async"'
-    + (prod.fotoPos ? ' style="object-position:'+prod.fotoPos+'"' : '')
-    + ' onerror="FOTOS_ROTAS.add(this.getAttribute(\'src\'));this.parentNode.remove()"></div>';
-}
+const ABIERTAS = new Set();   // productos desplegados (se mantienen al filtrar)
+let idTarjeta = 0;
+function esc(t){ return (t||"").replace(/"/g,"&quot;"); }
+
 function tarjeta(prod, pesos){
+  const id = "det-" + (++idTarjeta);
+  const abierta = ABIERTAS.has(prod.nombre);
+
   const medidas = pesos.map((peso, i) => {
     const p = prod.precios[i];
-    
-    if (p == null){
-      return '';
-    }
-    if (prod.stock === "no"){
-      return '<li class="medida sin-stock-medida"></li>';
-    }
+    if (p == null) return '';
     const k = clave(prod, peso);
     return '<li class="medida" data-k="'+k+'">'
       + '<span class="info"><span class="peso">'+peso+'</span><span class="precio">'+plata(p)+'</span></span>'
       + '<span class="stepper">'
-      +   '<button type="button" data-accion="restar" data-k="'+k+'" aria-label="Quitar uno">–</button>'
+      +   '<button type="button" data-accion="restar" data-k="'+k+'" aria-label="Quitar uno de '+peso+'">–</button>'
       +   '<span class="cant" data-cant="'+k+'">0</span>'
-      +   '<button type="button" data-accion="sumar" data-k="'+k+'" data-nombre="'+prod.nombre.replace(/"/g,'&quot;')+'" data-nota="'+(prod.nota||'').replace(/"/g,'&quot;')+'" data-peso="'+peso+'" data-precio="'+p+'" aria-label="Agregar uno">+</button>'
+      +   '<button type="button" data-accion="sumar" data-k="'+k+'" data-nombre="'+esc(prod.nombre)+'" data-nota="'+esc(prod.nota)+'" data-peso="'+peso+'" data-precio="'+p+'" aria-label="Agregar uno de '+peso+'">+</button>'
       + '</span>'
       + '</li>';
   }).join("");
 
-  const boton = prod.stock === "no"
-    ? '<span class="wa off">Proximamente disponible</span>'
-    : '<a class="wa" href="'+linkWhatsApp(prod)+'" target="_blank" rel="noopener">'+ICONO_WA+'Consultar por WhatsApp</a>';
+  // precio de la tarjeta cerrada: la presentación más chica que se vende
+  const iMin = prod.precios.findIndex(p => p != null);
+  const desde = (prod.stock === "no" || iMin < 0)
+    ? '<span class="prox">Próximamente</span>'
+    : '<span class="peso">'+pesos[iMin]+'</span><span class="precio">'+plata(prod.precios[iMin])+'</span>';
 
-  return '<article class="card">'
-    + fotoHtml(prod)
-    + '<div class="card-cuerpo">'
-    + '<div class="card-top">'
-    +   '<div><h3>'+prod.nombre+(prod.nota?' <em>('+prod.nota+')</em>':'')+'</h3>'
-    +   (prod.desc?'<p class="desc">'+prod.desc+'</p>':'')+'</div>'
-    +   '<span class="stock '+prod.stock+'">'+ETIQUETA_STOCK[prod.stock]+'</span>'
-    + '</div>'
-    + '<ul class="medidas">'+medidas+'</ul>'
-    + boton
+  const stock = prod.stock === "hay" ? '' : '<span class="stock '+prod.stock+'">'+ETIQUETA_STOCK[prod.stock]+'</span>';
+  const foto = (prod.foto ? '<img src="'+prod.foto+'" alt="" loading="lazy" decoding="async"'
+      + (prod.fotoPos ? ' style="object-position:'+prod.fotoPos+'"' : '') + ' onerror="this.remove()">' : '');
+
+  const cuerpo = prod.stock === "no"
+    ? '<p class="sin-stock-msg">Próximamente disponible</p>'
+    : '<ul class="medidas">'+medidas+'</ul>';
+
+  return '<article class="card'+(abierta?' abierta':'')+'" data-nombre="'+esc(prod.nombre)+'">'
+    + '<button class="card-head" type="button" aria-expanded="'+abierta+'" aria-controls="'+id+'">'
+    +   '<span class="card-foto"><span class="foto-vacia" aria-hidden="true">'+prod.nombre.charAt(0)+'</span>'+foto+stock+'<span class="card-badge" hidden>0</span></span>'
+    +   '<span class="card-info"><span class="card-nombre">'+prod.nombre+'</span><span class="card-desde">'+desde+'</span></span>'
+    +   '<span class="chev" aria-hidden="true"></span>'
+    + '</button>'
+    + '<div class="card-detalle" id="'+id+'"'+(abierta?'':' hidden')+'>'
+    +   (prod.nota?'<p class="det-nota">'+prod.nota.charAt(0).toUpperCase()+prod.nota.slice(1)+'</p>':'')
+    +   (prod.desc?'<p class="desc">'+prod.desc+'</p>':'')
+    +   (prod.stock==="poco"?'<span class="stock poco">Poco stock</span>':'')
+    +   cuerpo
+    +   '<a class="consultar" href="'+linkWhatsApp(prod)+'" target="_blank" rel="noopener">'+ICONO_WA+'Consultar por WhatsApp</a>'
     + '</div>'
     + '</article>';
 }
@@ -916,6 +938,11 @@ function pintarCantidadesEnTarjetas(){
     const k = el.getAttribute("data-cant");
     el.textContent = CARRITO[k] ? CARRITO[k].cant : 0;
   });
+  document.querySelectorAll(".card[data-nombre]").forEach(c => {
+    const n = Object.values(CARRITO).filter(i => i.nombre === c.dataset.nombre).reduce((t,i) => t + i.cant, 0);
+    const b = c.querySelector(".card-badge");
+    if (b){ b.textContent = n; b.hidden = !n; }
+  });
   document.querySelectorAll(".medida[data-k]").forEach(li => {
     const k = li.getAttribute("data-k");
     li.classList.toggle("en-carrito", !!(CARRITO[k] && CARRITO[k].cant > 0));
@@ -985,8 +1012,24 @@ function actualizarTodo(){
 }
 
 document.getElementById("salida").addEventListener("click", e => {
-  const btn = e.target.closest("button[data-accion]");
-  if (!btn) return;
+  const head = e.target.closest(".card-head");
+  if (!head) return;
+  const c = head.closest(".card");
+  const abre = !c.classList.contains("abierta");
+  c.classList.toggle("abierta", abre);
+  head.setAttribute("aria-expanded", abre);
+  c.querySelector(".card-detalle").hidden = !abre;
+  if (abre) ABIERTAS.add(c.dataset.nombre); else ABIERTAS.delete(c.dataset.nombre);
+});
+
+document.getElementById("salida").addEventListener("click", e => {
+  let btn = e.target.closest("button[data-accion]");
+  if (!btn){
+    const li = e.target.closest(".medida[data-k]");
+    if (!li) return;
+    btn = li.querySelector('button[data-accion="sumar"]');
+    if (!btn) return;
+  }
   const k = btn.getAttribute("data-k");
   const accion = btn.getAttribute("data-accion");
 
